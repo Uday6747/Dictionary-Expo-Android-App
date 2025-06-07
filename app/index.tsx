@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 interface Phonetic {
   text?: string;
@@ -283,7 +284,7 @@ export default function DictionaryApp() {
       {/* Footer */}
       <View style={styles.footer}>
         <Text style={[styles.footerText, isDark && styles.darkSecondaryText]}>
-          Powered by Free Dictionary API
+          Developed by UDAY KUMAR CHINNI ( <AntDesign name="github" size={12} color="white" /> Uday6747)
         </Text>
       </View>
     </ScrollView>
