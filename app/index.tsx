@@ -39,13 +39,11 @@ export default function DictionaryApp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
 
   useEffect(() => {
     loadHistory();
-    loadFavorites();
   }, []);
 
   const loadHistory = async () => {
@@ -55,15 +53,6 @@ export default function DictionaryApp() {
 
   const saveHistory = async (history: string[]) => {
     await AsyncStorage.setItem('searchHistory', JSON.stringify(history));
-  };
-
-  const loadFavorites = async () => {
-    const fav = await AsyncStorage.getItem('favorites');
-    if (fav) setFavorites(JSON.parse(fav));
-  };
-
-  const saveFavorites = async (fav: string[]) => {
-    await AsyncStorage.setItem('favorites', JSON.stringify(fav));
   };
 
   const searchWord = async (word: string) => {
@@ -91,16 +80,6 @@ export default function DictionaryApp() {
     await sound.playAsync();
   };
 
-  const toggleFavorite = async (word: string) => {
-    let updated = [...favorites];
-    if (favorites.includes(word)) {
-      updated = favorites.filter((w) => w !== word);
-    } else {
-      updated.push(word);
-    }
-    setFavorites(updated);
-    saveFavorites(updated);
-  };
 
   return (
     <ScrollView style={[styles.container, isDark && styles.darkContainer]}>
